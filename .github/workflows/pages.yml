@@ -41,14 +41,14 @@ jobs:
       - run: npm run build
         env:
           NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/2027/
-          NUXT_I18N_BASE_URL: ${{ steps.pages.outputs.origin }}
+          NUXT_I18N_BASE_URL: ${{ steps.pages.outputs.base_path == '' && 'https://twbronycon.org' || steps.pages.outputs.origin }}
       - run: npm ci
         working-directory: archive-2026
       - run: npm run generate
         working-directory: archive-2026
         env:
           NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/2026/
-          NUXT_I18N_BASE_URL: ${{ steps.pages.outputs.origin }}
+          NUXT_I18N_BASE_URL: ${{ steps.pages.outputs.base_path == '' && 'https://twbronycon.org' || steps.pages.outputs.origin }}
       - name: Assemble yearly sites
         run: |
           site="$RUNNER_TEMP/twbc-pages"
