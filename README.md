@@ -35,12 +35,15 @@ preserving query strings. Do not redirect the archive hostname before cutover.
 
 ## Previews: Cloudflare Pages
 
-Connect each source repository to its own Cloudflare Pages project. Disable
-automatic production deployments, enable preview deployments for non-production
-branches, and leave `NUXT_APP_BASE_URL` unset. Use `.output/public` as the output
-directory. The 2027 build command is `npm run build`; the 2026 build command is
-`npm run generate`. Cloudflare Pages uploads the output directly, so there is no
-Wrangler deploy command.
+The `twbc-2026-preview` and `twbc-2027-preview` Cloudflare Pages projects are
+connected to their respective repositories. Automatic production deployments
+are disabled; non-production branches deploy to preview URLs. Both use
+`.output/public` and leave `NUXT_APP_BASE_URL` unset.
+
+The 2027 build command is `npm run build`. The 2026 build command is
+`npm run sync:avatars && npx nuxt build --prerender --preset static` so it
+also works on archive branches predating the static build script. Cloudflare
+Pages uploads the output directly, with no Wrangler deploy command.
 
 ## Announcement copy
 
