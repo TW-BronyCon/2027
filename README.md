@@ -19,13 +19,19 @@ npm run build
 npx serve .output/public
 ```
 
-## GitHub Pages
+## Cloudflare deployment
 
-In the repository's **Settings → Pages**, select **GitHub Actions** as the
-build and deployment source. The [Pages workflow](.github/workflows/pages.yml)
-deploys on pushes to `main` and can also be run manually. It uses the Pages
-origin and base path for locale metadata, assets, and links, so the same
-workflow supports a project subpath or a custom domain configured in Pages.
+For a **Cloudflare Pages** project connected to Git, set the build command to
+`npm run build` and the build output directory to `.output/public`. Pages uploads
+that directory automatically; do not add a deploy command.
+
+If the dashboard shows a **Deploy command**, the project is using **Workers
+Builds** instead. Use `npm run build` and `npx wrangler deploy` there. The
+repository's `wrangler.jsonc` deploys the same static files without a Worker
+entry point.
+
+Set `NUXT_I18N_BASE_URL` to the public site origin if it differs from
+`https://twbronycon.org`. Leave `NUXT_APP_BASE_URL` unset for a root deployment.
 
 ## Announcement copy
 

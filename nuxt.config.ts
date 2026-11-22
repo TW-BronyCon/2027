@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     },
   },
   i18n: {
-    baseUrl: process.env.NUXT_I18N_BASE_URL ?? "https://tw-bronycon.github.io",
+    baseUrl: process.env.NUXT_I18N_BASE_URL ?? "https://twbronycon.org",
     defaultLocale: "zh-TW",
     strategy: "prefix_except_default",
     detectBrowserLanguage: false,
