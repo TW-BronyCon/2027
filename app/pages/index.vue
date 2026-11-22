@@ -26,6 +26,8 @@ useSeoMeta({
   grid-template-rows: 1fr auto;
   min-block-size: 100vh;
   min-block-size: 100dvh;
+  background: linear-gradient(to bottom left, #1742b0, #4dd0ff);
+  background: linear-gradient(to bottom left in oklab, #1742b0, #4dd0ff);
 }
 
 .teaser {
@@ -33,8 +35,6 @@ useSeoMeta({
   place-items: center;
   padding: 1.5rem;
   text-align: center;
-  background: linear-gradient(to bottom left, #1742b0, #4dd0ff);
-  background: linear-gradient(to bottom left in oklab, #1742b0, #4dd0ff);
 }
 
 .headline {

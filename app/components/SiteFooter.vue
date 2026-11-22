@@ -1,25 +1,57 @@
 <script setup lang="ts">
+import {
+  faDiscord,
+  faFacebook,
+  faGithub,
+  faInstagram,
+  faXTwitter,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+import { faBoxArchive, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
 const { t, locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
+const logoBase = `${useRuntimeConfig().app.baseURL}footer/`;
 
 const partners = [
-  { name: "Bronyfestival", href: "https://bronyfestival.com/" },
-  { name: "CSBC", href: "https://csbronycarnival.com/" },
-  { name: "MLPCON.INFO", href: "https://mlpcon.info/" },
-  { name: "MalangPony", href: "https://malangpony.com/" },
-  { name: "Norse Horse Con", href: "https://www.norsehorsecon.eu/" },
+  {
+    name: "Bronyfestival",
+    href: "https://bronyfestival.com/",
+    logo: "bf.avif",
+  },
+  { name: "CSBC", href: "https://csbronycarnival.com/", logo: "csbc.avif" },
+  { name: "MLPCON.INFO", href: "https://mlpcon.info/", logo: "mlpcon.avif" },
+  { name: "MalangPony", href: "https://malangpony.com/", logo: "MPN.avif" },
+  {
+    name: "Norse Horse Con",
+    href: "https://www.norsehorsecon.eu/",
+    logo: "nhc.avif",
+  },
 ];
 
 const socials = [
-  { name: "YouTube", href: "https://www.youtube.com/@TWBronyCon2" },
-  { name: "Discord", href: "https://discord.gg/k83NMPUKxG" },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@TWBronyCon2",
+    icon: faYoutube,
+  },
+  { name: "Discord", href: "https://discord.gg/k83NMPUKxG", icon: faDiscord },
   {
     name: "Facebook",
     href: "https://www.facebook.com/profile.php?id=61583292256078",
+    icon: faFacebook,
   },
-  { name: "X", href: "https://x.com/TWBronycon2" },
-  { name: "Instagram", href: "https://www.instagram.com/taiwanbronycon2" },
-  { name: "GitHub", href: "https://github.com/TW-BronyCon/2027-Manesite" },
+  { name: "X", href: "https://x.com/TWBronycon2", icon: faXTwitter },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/taiwanbronycon2",
+    icon: faInstagram,
+  },
+  {
+    name: "GitHub",
+    href: "https://github.com/TW-BronyCon/2027-Manesite",
+    icon: faGithub,
+  },
 ];
 </script>
 
@@ -29,9 +61,21 @@ const socials = [
       <div class="top">
         <div class="brand">
           <nav class="links" :aria-label="t('footer.partners')">
-            <NuxtLink :to="switchLocalePath(locale)">TWBC</NuxtLink>
-            <a v-for="link in partners" :key="link.href" :href="link.href">
-              {{ link.name }}
+            <NuxtLink class="icon-link" :to="switchLocalePath(locale)">
+              <img
+                class="logo"
+                :src="`${logoBase}text-logo-clear.avif`"
+                alt="TWBC"
+              />
+            </NuxtLink>
+            <a
+              v-for="link in partners"
+              :key="link.href"
+              class="icon-link"
+              :href="link.href"
+              :title="link.name"
+            >
+              <img class="logo" :src="logoBase + link.logo" :alt="link.name" />
             </a>
           </nav>
           <nav class="links" :aria-label="t('footer.language')">
@@ -47,15 +91,36 @@ const socials = [
           </nav>
         </div>
         <nav class="links" :aria-label="t('footer.social')">
-          <a v-for="link in socials" :key="link.href" :href="link.href">
-            {{ link.name }}
+          <a
+            v-for="link in socials"
+            :key="link.href"
+            class="icon-link"
+            :href="link.href"
+            :aria-label="link.name"
+            :title="link.name"
+          >
+            <FooterIcon :icon="link.icon" />
           </a>
-          <a href="mailto:twbronycon2@gmail.com">{{ t("footer.email") }}</a>
+          <a
+            class="icon-link"
+            href="mailto:twbronycon2@gmail.com"
+            :aria-label="t('footer.email')"
+            :title="t('footer.email')"
+          >
+            <FooterIcon :icon="faEnvelope" />
+          </a>
         </nav>
       </div>
       <div class="bottom">
         <p>{{ t("footer.copyright") }}</p>
-        <a href="https://2026.twbronycon.org/">{{ t("archive2026") }}</a>
+        <a
+          class="icon-link"
+          href="https://2026.twbronycon.org/"
+          :aria-label="t('archive2026')"
+          :title="t('archive2026')"
+        >
+          <FooterIcon :icon="faBoxArchive" />
+        </a>
       </div>
     </div>
   </footer>
@@ -63,8 +128,8 @@ const socials = [
 
 <style scoped>
 .footer {
-  color: #ffbdde;
-  background: linear-gradient(transparent, #201326);
+  color: #fff;
+  background-color: #102651b8;
   padding: 1.5rem;
   font-size: 0.875rem;
 }
@@ -110,5 +175,28 @@ const socials = [
 
 .footer a[aria-current="page"] {
   font-weight: 700;
+}
+
+.icon-link {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border-radius: 0.5rem;
+}
+
+.icon-link:hover {
+  background-color: #ffffff24;
+}
+
+.footer a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.logo {
+  inline-size: 2.5rem;
+  block-size: 2rem;
+  object-fit: contain;
 }
 </style>
