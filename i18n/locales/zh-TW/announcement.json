@@ -2,5 +2,12 @@
   "announcement": {
     "headline": "2027年夏天，有事要發生。"
   },
-  "archive2026": "2026年活動網站"
+  "archive2026": "2026年活動網站",
+  "footer": {
+    "partners": "合作網站",
+    "language": "語言",
+    "social": "社群與聯絡方式",
+    "email": "電子郵件",
+    "copyright": "© 2027 TWBC版權所有"
+  }
 }

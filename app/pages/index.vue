@@ -16,9 +16,7 @@ useSeoMeta({
     <main class="teaser">
       <h1 class="headline">{{ title }}</h1>
     </main>
-    <footer class="footer">
-      <a href="https://2026.twbronycon.org/">{{ t("archive2026") }}</a>
-    </footer>
+    <SiteFooter />
   </div>
 </template>
 
@@ -28,13 +26,13 @@ useSeoMeta({
   grid-template-rows: 1fr auto;
   min-block-size: 100vh;
   min-block-size: 100dvh;
-  text-align: center;
 }
 
 .teaser {
   display: grid;
   place-items: center;
   padding: 1.5rem;
+  text-align: center;
 }
 
 .headline {
@@ -43,15 +41,5 @@ useSeoMeta({
   font-size: clamp(1.75rem, 1.25rem + 2vw, 3.5rem);
   line-height: 1.2;
   text-wrap: balance;
-}
-
-.footer {
-  padding: 1rem 1.5rem 1.5rem;
-  font-size: 0.875rem;
-}
-
-.footer a {
-  color: inherit;
-  text-underline-offset: 0.2em;
 }
 </style>
