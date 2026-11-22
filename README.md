@@ -19,19 +19,28 @@ npm run build
 npx serve .output/public
 ```
 
-## Cloudflare deployment
+## Production: GitHub Pages
 
-For a **Cloudflare Pages** project connected to Git, set the build command to
-`npm run build` and the build output directory to `.output/public`. Pages uploads
-that directory automatically; do not add a deploy command.
+The [Pages workflow](.github/workflows/pages.yml) builds this repository and a
+pinned revision of `TW-BronyCon/2026-ManeSite`, then publishes one artifact
+with `/2026/` and `/2027/`. Set **Settings → Pages → Source** to **GitHub Actions**
+and use `twbronycon.org` as the custom domain after validating the artifact.
+Update the pinned archive revision when publishing archive changes.
 
-If the dashboard shows a **Deploy command**, the project is using **Workers
-Builds** instead. Use `npm run build` and `npx wrangler deploy` there. The
-repository's `wrangler.jsonc` deploys the same static files without a Worker
-entry point.
+At the Cloudflare edge, redirect only `https://twbronycon.org/` to
+`https://twbronycon.org/2027/` with HTTP 302. The Pages artifact includes a
+fallback HTML redirect. After the archive is live at `/2026/`, redirect
+`2026.twbronycon.org/*` to `https://twbronycon.org/2026/$1` with HTTP 301,
+preserving query strings. Do not redirect the archive hostname before cutover.
 
-Set `NUXT_I18N_BASE_URL` to the public site origin if it differs from
-`https://twbronycon.org`. Leave `NUXT_APP_BASE_URL` unset for a root deployment.
+## Previews: Cloudflare Pages
+
+Connect each source repository to its own Cloudflare Pages project. Disable
+automatic production deployments, enable preview deployments for non-production
+branches, and leave `NUXT_APP_BASE_URL` unset. Use `.output/public` as the output
+directory. The 2027 build command is `npm run build`; the 2026 build command is
+`npm run generate`. Cloudflare Pages uploads the output directly, so there is no
+Wrangler deploy command.
 
 ## Announcement copy
 

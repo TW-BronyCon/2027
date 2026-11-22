@@ -114,7 +114,7 @@ const socials = [
       </div>
       <div class="bottom">
         <p>{{ t("footer.copyright") }}</p>
-        <a class="archive-link" href="https://2026.twbronycon.org/">
+        <a class="archive-link" href="https://twbronycon.org/2026/">
           {{ t("archive2026") }}
         </a>
       </div>

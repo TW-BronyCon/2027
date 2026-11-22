@@ -1,0 +1,75 @@
+name: Deploy event sites to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: TW-BronyCon/2026-ManeSite
+          ref: 32f125ecd5a599183007ff05e556bd2d1129de8e
+          path: archive-2026
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            archive-2026/package-lock.json
+      - uses: actions/configure-pages@v6
+        id: pages
+      - run: npm ci
+      - run: npm run build
+        env:
+          NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/2027/
+          NUXT_I18N_BASE_URL: ${{ steps.pages.outputs.origin }}
+      - run: npm ci
+        working-directory: archive-2026
+      - run: npm run generate
+        working-directory: archive-2026
+        env:
+          NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/2026/
+          NUXT_I18N_BASE_URL: ${{ steps.pages.outputs.origin }}
+      - name: Assemble yearly sites
+        run: |
+          mkdir -p dist/2026 dist/2027
+          cp -a archive-2026/.output/public/. dist/2026/
+          cp -a .output/public/. dist/2027/
+          cp deployment/index.html dist/index.html
+          touch dist/.nojekyll
+          test -s dist/2026/en/index.html
+          test -s dist/2027/en/index.html
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v5
+        id: deploy
