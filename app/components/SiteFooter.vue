@@ -82,6 +82,7 @@ const socials = [
             <NuxtLink
               v-for="language in locales"
               :key="language.code"
+              class="language-link"
               :to="switchLocalePath(language.code)"
               :lang="language.language"
               :hreflang="language.language"
@@ -113,13 +114,9 @@ const socials = [
       </div>
       <div class="bottom">
         <p>{{ t("footer.copyright") }}</p>
-        <a
-          class="icon-link"
-          href="https://2026.twbronycon.org/"
-          :aria-label="t('archive2026')"
-          :title="t('archive2026')"
-        >
+        <a class="icon-link archive-link" href="https://2026.twbronycon.org/">
           <FooterIcon :icon="faBoxArchive" />
+          {{ t("archive2026") }}
         </a>
       </div>
     </div>
@@ -173,8 +170,17 @@ const socials = [
   text-underline-offset: 0.2em;
 }
 
-.footer a[aria-current="page"] {
+.language-link {
+  text-decoration: none;
+}
+
+.language-link:hover {
+  color: #d0f4ff;
+}
+
+.language-link[aria-current="page"] {
   font-weight: 700;
+  text-shadow: 0 0 0.65em #a5ecff;
 }
 
 .icon-link {
@@ -183,6 +189,13 @@ const socials = [
   min-inline-size: 2.75rem;
   min-block-size: 2.75rem;
   border-radius: 0.5rem;
+}
+
+.archive-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.5rem;
 }
 
 .icon-link:hover {
