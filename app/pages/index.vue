@@ -33,6 +33,8 @@ useSeoMeta({
   place-items: center;
   padding: 1.5rem;
   text-align: center;
+  background: linear-gradient(to bottom left, #1742b0, #4dd0ff);
+  background: linear-gradient(to bottom left in oklab, #1742b0, #4dd0ff);
 }
 
 .headline {
@@ -41,5 +43,6 @@ useSeoMeta({
   font-size: clamp(1.75rem, 1.25rem + 2vw, 3.5rem);
   line-height: 1.2;
   text-wrap: balance;
+  text-shadow: 0 1px 3px #0a235c;
 }
 </style>
