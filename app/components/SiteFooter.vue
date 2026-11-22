@@ -7,7 +7,7 @@ import {
   faXTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import { faBoxArchive, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const { t, locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
@@ -114,8 +114,7 @@ const socials = [
       </div>
       <div class="bottom">
         <p>{{ t("footer.copyright") }}</p>
-        <a class="icon-link archive-link" href="https://2026.twbronycon.org/">
-          <FooterIcon :icon="faBoxArchive" />
+        <a class="archive-link" href="https://2026.twbronycon.org/">
           {{ t("archive2026") }}
         </a>
       </div>
@@ -167,7 +166,6 @@ const socials = [
 
 .footer a {
   color: inherit;
-  text-underline-offset: 0.2em;
 }
 
 .language-link {
@@ -183,6 +181,7 @@ const socials = [
   text-shadow: 0 0 0.65em #a5ecff;
 }
 
+.archive-link,
 .icon-link {
   display: inline-grid;
   place-items: center;
@@ -192,12 +191,11 @@ const socials = [
 }
 
 .archive-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  text-decoration: none;
   padding-inline: 0.5rem;
 }
 
+.archive-link:hover,
 .icon-link:hover {
   background-color: #ffffff24;
 }
