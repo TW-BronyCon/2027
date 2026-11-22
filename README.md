@@ -30,14 +30,10 @@ workflow supports a project subpath or a custom domain configured in Pages.
 ## Announcement copy
 
 Edit `i18n/locales/en/announcement.json` and
-`i18n/locales/zh-TW/announcement.json`. Each exposes `announcement.season`,
-`announcement.headline`, and `announcement.description`; the season and
-description also feed the page metadata. Interface labels live separately in
-`ui.json` for each locale.
+`i18n/locales/zh-TW/announcement.json`. The `announcement.headline` field
+sets both the visible sentence and the page title.
 
 Google Sheets is not connected. A future build-time sync can map one row per
-locale (`locale`, `season`, `headline`, `description`) into these announcement
-files before `npm run build`. Treat cells as plain text and escape Vue I18n
-message syntax when generating the catalogs. Keep any Sheets credentials in
-GitHub Actions secrets, not in the static site. Publishing edits from the sheet
-will require a rebuild and deploy.
+locale (`locale`, `headline`) into these files before `npm run build`. Escape
+Vue I18n message syntax in cell values and keep any credentials in GitHub Actions
+secrets. Publishing sheet edits will require a rebuild and deploy.
