@@ -21,17 +21,11 @@ npx serve .output/public
 
 ## Production: GitHub Pages
 
-The [Pages workflow](.github/workflows/pages.yml) builds this repository and a
-pinned revision of `TW-BronyCon/2026-ManeSite`, then publishes one artifact
-with `/2026/` and `/2027/`. Set **Settings → Pages → Source** to **GitHub Actions**
-and use `twbronycon.org` as the custom domain after validating the artifact.
-Update the pinned archive revision when publishing archive changes.
-
-At the Cloudflare edge, redirect only `https://twbronycon.org/` to
-`https://twbronycon.org/2027/` with HTTP 302. The Pages artifact includes a
-fallback HTML redirect. After the archive is live at `/2026/`, redirect
-`2026.twbronycon.org/*` to `https://twbronycon.org/2026/$1` with HTTP 301,
-preserving query strings. Do not redirect the archive hostname before cutover.
+The [Pages workflow](.github/workflows/pages.yml) deploys only this repo to
+`https://twbronycon.org/2027/`, including its own `404.html` and sitemap. The
+organization Pages repository `TW-BronyCon/tw-bronycon.github.io` owns the
+custom domain, root redirect, and sitemap index. `TW-BronyCon/2026` deploys
+the archive independently at `/2026/` from its `deploy/year-path` branch.
 
 ## Previews: Cloudflare Pages
 
