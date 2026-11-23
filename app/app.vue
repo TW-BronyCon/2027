@@ -1,11 +1,33 @@
 <script setup lang="ts">
 const localeHead = useLocaleHead({ seo: true });
-const icon = `${useRuntimeConfig().app.baseURL}favicon.ico`;
+const baseURL = useRuntimeConfig().app.baseURL;
+const icon = `${baseURL}favicon.ico`;
+const googleTag = "G-QN69QWDCDV";
 
 useHead(() => ({
   ...localeHead.value,
   link: [...(localeHead.value.link ?? []), { rel: "icon", href: icon }],
 }));
+
+if (baseURL === "/2027/") {
+  useHead({
+    script: [
+      {
+        innerHTML: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${googleTag}');
+        `,
+      },
+      {
+        src: `https://www.googletagmanager.com/gtag/js?id=${googleTag}`,
+        async: true,
+        fetchpriority: "low",
+      },
+    ],
+  });
+}
 </script>
 
 <template>

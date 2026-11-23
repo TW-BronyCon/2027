@@ -1,13 +1,32 @@
 <script setup lang="ts">
-const { t } = useI18n();
+const { locale, t } = useI18n();
 const title = computed(() => t("announcement.headline"));
+const description = computed(() => t("announcement.description"));
+const shareUrl = computed(() =>
+  locale.value === "en"
+    ? "https://twbronycon.org/2027/en"
+    : "https://twbronycon.org/2027",
+);
+const shareImage = "https://twbronycon.org/2027/og-2027.png";
+const imageAlt = computed(() => t("announcement.shareImageAlt"));
 
 useSeoMeta({
   title,
+  description,
   ogType: "website",
   ogTitle: title,
-  twitterCard: "summary",
+  ogUrl: shareUrl,
+  ogDescription: description,
+  ogImage: shareImage,
+  ogImageType: "image/png",
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: imageAlt,
+  twitterCard: "summary_large_image",
   twitterTitle: title,
+  twitterDescription: description,
+  twitterImage: shareImage,
+  twitterImageAlt: imageAlt,
 });
 </script>
 

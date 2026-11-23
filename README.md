@@ -27,6 +27,12 @@ organization Pages repository `TW-BronyCon/tw-bronycon.github.io` owns the
 custom domain, root redirect, and sitemap index. `TW-BronyCon/2026` deploys
 the archive independently at `/2026/` from its `deploy/year-path` branch.
 
+The latest event provides the social share metadata in both locales and the
+share image at `/2027/og-2027.png`. Production `/2027/` builds use the same
+Google tag as `/2026/`; root-path preview builds do not load it. The apex HTTP
+redirect does not execute analytics, so a visit through `/` is counted on the
+destination page rather than counted twice.
+
 ## Previews: Cloudflare Pages
 
 The `twbc-2026-preview` and `twbc-2027-preview` Cloudflare Pages projects are
