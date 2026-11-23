@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build --prerender --preset static",
+    "postbuild": "node scripts/sitemap.mjs 2027",
     "typecheck": "nuxt typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
