@@ -6,7 +6,14 @@ const googleTag = "G-QN69QWDCDV";
 
 useHead(() => ({
   ...localeHead.value,
-  link: [...(localeHead.value.link ?? []), { rel: "icon", href: icon }],
+  link: [
+    ...(localeHead.value.link ?? []).map((link) =>
+      link.href === `https://twbronycon.org${baseURL.slice(0, -1)}`
+        ? { ...link, href: `${link.href}/` }
+        : link,
+    ),
+    { rel: "icon", href: icon },
+  ],
 }));
 
 if (baseURL === "/2027/") {

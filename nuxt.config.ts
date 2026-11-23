@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     baseUrl: process.env.NUXT_I18N_BASE_URL ?? "https://twbronycon.org",
     defaultLocale: "zh-TW",
     strategy: "prefix_except_default",
+    trailingSlash: true,
     detectBrowserLanguage: false,
     locales: [
       {

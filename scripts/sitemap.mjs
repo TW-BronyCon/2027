@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
@@ -28,13 +29,33 @@ if (base === `/${year}/`) {
       !url.search &&
       !url.hash
     ) {
-      urls.add(canonical);
+      url.pathname = `${url.pathname.replace(/\/$/, "")}/`;
+      urls.add(url.href);
     }
   }
   if (!urls.size) throw new Error(`No production canonical URLs for ${year}`);
-  const entries = [...urls]
-    .sort()
-    .map((url) => `  <url><loc>${url.replaceAll("&", "&amp;")}</loc></url>`);
+  // Use the latest site-source commit, not the deployment time.
+  const lastmod = execFileSync(
+    "git",
+    [
+      "log",
+      "-1",
+      "--format=%cs",
+      "--",
+      "app",
+      "i18n",
+      "public",
+      "nuxt.config.ts",
+    ],
+    { encoding: "utf8" },
+  ).trim();
+  const entries = [...urls].sort().map((url) => {
+    const { pathname } = new URL(url);
+    const priority =
+      pathname === `/${year}/` || pathname === `/${year}/en/` ? "1.0" : "0.8";
+    const modified = lastmod ? `<lastmod>${lastmod}</lastmod>` : "";
+    return `  <url><loc>${url.replaceAll("&", "&amp;")}</loc>${modified}<priority>${priority}</priority></url>`;
+  });
   await writeFile(
     join(output, "sitemap.xml"),
     [
