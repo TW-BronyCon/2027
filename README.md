@@ -33,17 +33,16 @@ Google tag as `/2026/`; root-path preview builds do not load it. The apex HTTP
 redirect does not execute analytics, so a visit through `/` is counted on the
 destination page rather than counted twice.
 
-## Previews: Cloudflare Pages
+## Previews: Cloudflare Workers
 
-The `twbc-2026-preview` and `twbc-2027-preview` Cloudflare Pages projects are
-connected to their respective repositories. Automatic production deployments
-are disabled; non-production branches deploy to preview URLs. Both use
-`.output/public` and leave `NUXT_APP_BASE_URL` unset.
+Build with `npm run build` and leave `NUXT_APP_BASE_URL` unset. The
+[Wrangler configuration](wrangler.jsonc) serves `.output/public` from
+`twbc-2027-preview.twbc.workers.dev`. Configure Workers Builds to run
+`npx wrangler deploy` on the primary branch and `npx wrangler preview` on other
+branches. The Worker is static and has no runtime bindings.
 
-The 2027 build command is `npm run build`. The 2026 build command is
-`npm run sync:avatars && npx nuxt build --prerender --preset static` so it
-also works on archive branches predating the static build script. Cloudflare
-Pages uploads the output directly, with no Wrangler deploy command.
+Keep the old Cloudflare Pages site available until the Worker serves both
+locales and its 404 page. This migration does not change GitHub Pages.
 
 ## Announcement copy
 

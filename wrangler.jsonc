@@ -1,6 +1,10 @@
 {
-  "name": "2027-manesite",
+  "name": "twbc-2027-preview",
+  "account_id": "2e8b5e652ce4f4753a253c5e0062f5c5",
   "compatibility_date": "2026-11-23",
+  "workers_dev": true,
+  "preview_urls": true,
+  "previews": {},
   "assets": {
     "directory": "./.output/public",
     "not_found_handling": "404-page",
