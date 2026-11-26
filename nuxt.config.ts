@@ -1,6 +1,5 @@
 export default defineNuxtConfig({
   compatibilityDate: "2026-11-23",
-  css: ["~/assets/css/global.css"],
   modules: ["@nuxtjs/i18n"],
   nitro: {
     prerender: {

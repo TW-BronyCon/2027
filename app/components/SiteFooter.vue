@@ -12,20 +12,42 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 const { t, locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const logoBase = `${useRuntimeConfig().app.baseURL}footer/`;
+const archiveUrl = computed(() =>
+  locale.value === "en"
+    ? "https://twbronycon.org/2026/en/"
+    : "https://twbronycon.org/2026/",
+);
 
 const partners = [
   {
     name: "Bronyfestival",
     href: "https://bronyfestival.com/",
     logo: "bf.avif",
+    height: 128,
   },
-  { name: "CSBC", href: "https://csbronycarnival.com/", logo: "csbc.avif" },
-  { name: "MLPCON.INFO", href: "https://mlpcon.info/", logo: "mlpcon.avif" },
-  { name: "MalangPony", href: "https://malangpony.com/", logo: "MPN.avif" },
+  {
+    name: "CSBC",
+    href: "https://csbronycarnival.com/",
+    logo: "csbc.avif",
+    height: 108,
+  },
+  {
+    name: "MLPCON.INFO",
+    href: "https://mlpcon.info/",
+    logo: "mlpcon.avif",
+    height: 71,
+  },
+  {
+    name: "MalangPony",
+    href: "https://malangpony.com/",
+    logo: "MPN.avif",
+    height: 46,
+  },
   {
     name: "Norse Horse Con",
     href: "https://www.norsehorsecon.eu/",
     logo: "nhc.avif",
+    height: 41,
   },
 ];
 
@@ -66,6 +88,8 @@ const socials = [
                 class="logo"
                 :src="`${logoBase}text-logo-clear.avif`"
                 alt="TWBC"
+                width="128"
+                height="98"
               />
             </NuxtLink>
             <a
@@ -75,7 +99,13 @@ const socials = [
               :href="link.href"
               :title="link.name"
             >
-              <img class="logo" :src="logoBase + link.logo" :alt="link.name" />
+              <img
+                class="logo"
+                :src="logoBase + link.logo"
+                :alt="link.name"
+                width="128"
+                :height="link.height"
+              />
             </a>
           </nav>
           <nav class="links" :aria-label="t('footer.language')">
@@ -114,7 +144,7 @@ const socials = [
       </div>
       <div class="bottom">
         <p>{{ t("footer.copyright") }}</p>
-        <a class="archive-link" href="https://twbronycon.org/2026/">
+        <a class="archive-link" :href="archiveUrl">
           {{ t("archive2026") }}
         </a>
       </div>

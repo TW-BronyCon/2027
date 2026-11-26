@@ -47,8 +47,8 @@ locales and its 404 page. This migration does not change GitHub Pages.
 ## Announcement copy
 
 Edit `i18n/locales/en/announcement.json` and
-`i18n/locales/zh-TW/announcement.json`. The `announcement.headline` field
-sets both the visible sentence and the page title.
+`i18n/locales/zh-TW/announcement.json`. `announcement.headline` is the visible
+heading; `announcement.title` sets the search result and social card title.
 
 Google Sheets is not connected. A future build-time sync can map one row per
 locale (`locale`, `headline`) into these files before `npm run build`. Escape

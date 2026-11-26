@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { locale, t } = useI18n();
-const title = computed(() => t("announcement.headline"));
+const title = computed(() => t("announcement.title"));
 const description = computed(() => t("announcement.description"));
 const shareUrl = computed(() =>
   locale.value === "en"
@@ -33,7 +33,10 @@ useSeoMeta({
 <template>
   <div class="page">
     <main class="teaser">
-      <h1 class="headline">{{ title }}</h1>
+      <div>
+        <h1 class="headline">{{ t("announcement.headline") }}</h1>
+        <p class="description">{{ description }}</p>
+      </div>
     </main>
     <SiteFooter />
   </div>
@@ -62,5 +65,11 @@ useSeoMeta({
   line-height: 1.2;
   text-wrap: balance;
   text-shadow: 0 1px 3px #0a235c;
+}
+
+.description {
+  max-inline-size: 36ch;
+  margin: 1rem auto 0;
+  text-wrap: balance;
 }
 </style>

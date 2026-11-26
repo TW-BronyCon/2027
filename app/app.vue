@@ -40,3 +40,16 @@ if (baseURL === "/2027/") {
 <template>
   <NuxtPage />
 </template>
+
+<style>
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  color: #f4f4f5;
+  background: #151517;
+}
+
+body {
+  margin: 0;
+}
+</style>
