@@ -1,9 +1,20 @@
+const publishSitemap = process.env.NUXT_APP_BASE_URL === "/2027/";
+
 export default defineNuxtConfig({
   compatibilityDate: "2026-11-23",
-  modules: ["@nuxtjs/i18n"],
+  modules: ["@nuxtjs/i18n", "@nuxtjs/sitemap"],
+  site: { url: "https://twbronycon.org", trailingSlash: true },
+  sitemap: {
+    enabled: publishSitemap,
+    autoI18n: false,
+    discoverImages: false,
+    discoverVideos: false,
+  },
   nitro: {
     prerender: {
-      routes: ["/", "/en"],
+      routes: ["/", "/en", ...(publishSitemap ? ["/sitemap.xml"] : [])],
+      // Internal links already include this base; do not crawl it as a route.
+      ignore: [/^\/2027(?:\/|$)/],
       failOnError: true,
     },
   },

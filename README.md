@@ -27,6 +27,8 @@ organization Pages repository `TW-BronyCon/tw-bronycon.github.io` owns the
 custom domain, root redirect, and sitemap index. `TW-BronyCon/2026` deploys
 the archive independently at `/2026/` from its `deploy/year-path` branch.
 
+Nuxt Sitemap prerenders `/sitemap.xml` for the `/2027/` production build only.
+
 The 2027 error page offers direct links to both language homepages and does
 not redirect automatically.
 
