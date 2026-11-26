@@ -9,9 +9,13 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
+const { recovery = false } = defineProps<{ recovery?: boolean }>();
 const { t, locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
-const logoBase = `${useRuntimeConfig().app.baseURL}footer/`;
+const base = useRuntimeConfig().app.baseURL;
+const logoBase = `${base}footer/`;
+const localeLink = (code: string) =>
+  recovery ? (code === "en" ? `${base}en/` : base) : switchLocalePath(code);
 const archiveUrl = computed(() =>
   locale.value === "en"
     ? "https://twbronycon.org/2026/en/"
@@ -83,7 +87,11 @@ const socials = [
       <div class="top">
         <div class="brand">
           <nav class="links" :aria-label="t('footer.partners')">
-            <NuxtLink class="icon-link" :to="switchLocalePath(locale)">
+            <NuxtLink
+              class="icon-link"
+              :to="localeLink(locale)"
+              :external="recovery"
+            >
               <img
                 class="logo"
                 :src="`${logoBase}text-logo-clear.avif`"
@@ -113,7 +121,8 @@ const socials = [
               v-for="language in locales"
               :key="language.code"
               class="language-link"
-              :to="switchLocalePath(language.code)"
+              :to="localeLink(language.code)"
+              :external="recovery"
               :lang="language.language"
               :hreflang="language.language"
             >
