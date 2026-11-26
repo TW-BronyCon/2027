@@ -5,6 +5,11 @@
     "description": "台灣馬聚將於2027年夏天回歸，更多消息敬請期待。",
     "shareImageAlt": "深藍底上的台灣馬聚標誌"
   },
+  "error": {
+    "notFound": "找不到頁面",
+    "unexpected": "發生錯誤",
+    "description": "請選擇語言，返回2027年台灣馬聚首頁。"
+  },
   "archive2026": "2026年活動網站",
   "footer": {
     "partners": "合作網站",

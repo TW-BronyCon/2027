@@ -5,6 +5,11 @@
     "description": "Taiwan BronyCon returns in summer 2027. Stay tuned for more details.",
     "shareImageAlt": "Taiwan BronyCon logo on a dark blue background"
   },
+  "error": {
+    "notFound": "Page not found",
+    "unexpected": "Something went wrong",
+    "description": "Choose a language to return to the Taiwan BronyCon 2027 homepage."
+  },
   "archive2026": "2026 site archive",
   "footer": {
     "partners": "Partner sites",
