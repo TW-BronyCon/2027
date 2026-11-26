@@ -33,10 +33,7 @@ useSeoMeta({
 <template>
   <div class="page">
     <main class="teaser">
-      <div>
-        <h1 class="headline">{{ t("announcement.headline") }}</h1>
-        <p class="description">{{ description }}</p>
-      </div>
+      <h1 class="headline">{{ t("announcement.headline") }}</h1>
     </main>
     <SiteFooter />
   </div>
@@ -65,11 +62,5 @@ useSeoMeta({
   line-height: 1.2;
   text-wrap: balance;
   text-shadow: 0 1px 3px #0a235c;
-}
-
-.description {
-  max-inline-size: 36ch;
-  margin: 1rem auto 0;
-  text-wrap: balance;
 }
 </style>
